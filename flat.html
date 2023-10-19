@@ -1,0 +1,187 @@
+<html>
+<script>
+    let ar = [1, 4, [3, 7], 2, [5, [8, 9], 10], 12];
+    //let flatdata = ar.flat(3);
+    entry = [];
+    function flatt(arr) {
+        arr.forEach((items) => {
+            if (Array.isArray(items)) {
+                flatt(items);
+            } else {
+                entry.push(items);
+            }
+        })
+    }
+    flatt(ar);
+    console.log(entry);
+
+    //function currying
+    function sum(...num) {
+        return num.reduce((acc, cur) =>
+            acc + cur, 0)
+    }
+    console.log(sum(1, 2, 3));
+
+    //sum(1)(2)(3)()
+    function sum1(a) {
+        return function (b) {
+            return function (c) {
+                if (c !== undefined) {
+                    return sum1(a + b + c);
+                } else {
+                    return a + b;
+                }
+            }
+        }
+    }
+    console.log(sum1(1)(5)());
+
+    //some,every
+    console.log('----');
+    const numval = [4,2,5,3,8,9,-3,5,-2,1];
+
+   let hasNeg = false;
+
+   for(i=0;i<numval.length;i++){
+    console.log(numval[i]);
+    if(numval[i] < 0){
+        hasNeg = true;
+    }
+   }
+console.log(hasNeg);
+
+let hasneg = numval.every(items => {
+    return items < 0
+})
+
+console.log(hasneg);
+
+console.log('----');
+const red = [3,5,6,7,54,6,35,5,67,6];
+
+const add = red.reduce((acc,cur) => {
+    return acc + cur 
+}) 
+console.log('Reduce ',add);
+
+//Arrow fn
+console.log('----');
+function xy(){
+    console.log('normal fn',this);
+}
+
+let addd = (a,b) => {
+    return a + b
+}
+
+console.log(addd(1,2));
+new xy();
+
+let youtube = {
+    channel:'program',
+    greet1 : function () {
+        console.log(this.constructor.name)
+    },
+    greet2 : () => {
+        console.log(this.constructor.name)
+    }
+}
+youtube.greet1();
+youtube.greet2();
+
+//async,await
+let promise = new Promise((res,rej) => {
+    setTimeout(() => {
+        res(0)
+    },2000)
+})
+
+async function some(){
+    console.log('a');
+    let pdata = await promise;
+    console.log(pdata);
+    console.log('c');
+}
+some()
+
+//callback
+console.log('------')
+function callback(num,cb) {
+for(i=0;i<num;i++){
+    console.log(i);
+}
+cb(i)
+}
+
+callback(10,(last) => console.log('last num',last));
+
+//callbackpromise
+console.log('-----')
+let p = new Promise((res,rej) => {
+    setTimeout(() => {
+        res(2)
+    },1000)
+})
+
+p.then((data) => {
+    console.log('Then1 ',data);
+    return data + 2
+}).then((data) => {
+    throw new Error();
+    console.log('Then2 ',data)
+    return data + 4
+}).catch((err) => {
+    console.log('Err occ ',err)
+})
+
+console.log('-------')
+function dou(val){
+  return val*2;
+}
+function val(num1,res=dou(num1)){
+    console.log(res)
+}
+val(2);
+
+console.log('------');
+//destructure
+
+let ar1 = [2,3,4,5];
+
+let [one,two,three,four] = ar1;
+
+console.log(one);
+console.log(two);
+console.log(three);
+console.log(four);
+
+let a = 10;
+let b = 20;
+
+[b,a] = [a,b];
+
+console.log(a);
+console.log(b);
+
+let obj = {
+    a1:120,
+    b1:130,
+    c1:{
+        d1:{e1:140}
+    }
+}
+
+let {c1:{d1:{e1}}} = obj; 
+console.log(e1);
+
+function pro(){
+    return Promise.reject('Erroir')
+}
+
+(async function(){
+let wait = await pro().then((data) => console.log(data)).catch((err) => console.log('handle',err));
+//console.log(wait);
+}());
+
+</script>
+</html>
