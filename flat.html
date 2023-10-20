@@ -43,18 +43,18 @@
    let hasNeg = false;
 
    for(i=0;i<numval.length;i++){
-    console.log(numval[i]);
+    //console.log(numval[i]);
     if(numval[i] < 0){
         hasNeg = true;
     }
    }
-console.log(hasNeg);
+//console.log(hasNeg);
 
 let hasneg = numval.every(items => {
     return items < 0
 })
 
-console.log(hasneg);
+//console.log(hasneg);
 
 console.log('----');
 const red = [3,5,6,7,54,6,35,5,67,6];
@@ -97,10 +97,10 @@ let promise = new Promise((res,rej) => {
 })
 
 async function some(){
-    console.log('a');
+  //  console.log('a');
     let pdata = await promise;
-    console.log(pdata);
-    console.log('c');
+   // console.log(pdata);
+    //console.log('c');
 }
 some()
 
@@ -108,7 +108,7 @@ some()
 console.log('------')
 function callback(num,cb) {
 for(i=0;i<num;i++){
-    console.log(i);
+   // console.log(i);
 }
 cb(i)
 }
@@ -124,14 +124,14 @@ let p = new Promise((res,rej) => {
 })
 
 p.then((data) => {
-    console.log('Then1 ',data);
+    //console.log('Then1 ',data);
     return data + 2
 }).then((data) => {
     throw new Error();
-    console.log('Then2 ',data)
+    //console.log('Then2 ',data)
     return data + 4
 }).catch((err) => {
-    console.log('Err occ ',err)
+   // console.log('Err occ ',err)
 })
 
 console.log('-------')
@@ -139,7 +139,7 @@ function dou(val){
   return val*2;
 }
 function val(num1,res=dou(num1)){
-    console.log(res)
+  //  console.log(res)
 }
 val(2);
 
@@ -150,18 +150,18 @@ let ar1 = [2,3,4,5];
 
 let [one,two,three,four] = ar1;
 
-console.log(one);
-console.log(two);
-console.log(three);
-console.log(four);
+// console.log(one);
+// console.log(two);
+// console.log(three);
+// console.log(four);
 
 let a = 10;
 let b = 20;
 
 [b,a] = [a,b];
 
-console.log(a);
-console.log(b);
+// console.log(a);
+// console.log(b);
 
 let obj = {
     a1:120,
@@ -172,15 +172,122 @@ let obj = {
 }
 
 let {c1:{d1:{e1}}} = obj; 
-console.log(e1);
+//console.log(e1);
 function pro(){
     return Promise.reject('Erroir')
 }
 
 (async function(){
-let wait = await pro().then((data) => console.log(data)).catch((err) => console.log('handle',err));
+let wait = await pro().then((data) => console.log(data)).catch((err) => console.log() );
 //console.log(wait);
 }());
+
+//findunique
+const str = "acdelkda";
+
+const hash = {};
+
+for(i=0;i<str.length;i++){
+    hash[str[i]] = (hash[str[i]] || 0) + 1;
+}
+for(let keyy in hash){
+    console.log("Answer ",keyy +':'+ hash[keyy]);
+}
+//console.log(hash);
+console.log('--------');
+function all(...no){
+  return no.reduce((a,c)=> a+c,0)
+}
+console.log(all(5,6,8,3));
+
+function addx(a,b){
+    return a + b
+}
+console.log(addx(7,9));
+
+//arrow
+//arrow can assign to variable,this,argumrnts not have,new keyword not used
+function xcv() {
+    this.a = 11;
+   // let that = this;
+    setTimeout(() => {
+        console.log('Value inside ',this.a)
+    },100)
+    console.log('Value outsdieis ',this.a)
+}
+let v = new xcv()
+
+function nor(){
+    console.log(arguments);
+}
+
+const fat = (...arg) => {
+    console.log(arg);
+}
+
+nor(22,23,23);
+fat(30,32,33);
+
+//map&filter
+var arn = ['My name','My roll'];
+
+var rmp = arn.map((item) => {
+    return item +' is'
+});
+
+console.log(rmp);
+
+var mk = [50,65,30,22,11,76];
+
+var rc = mk.filter((item) => {
+    return item < 30
+})
+
+console.log(rc.length);
+
+//callapplybind
+function vim(aa) {
+    console.log(this,aa);
+}
+let oj = {
+    v1:20
+}
+//vimf = vim.bind(oj);
+vim.apply(oj,[23])
+
+//lexical scope,fn scope
+
+
+
+function gg(){
+ myvar = 33;
+console.log(myvar);
+}
+gg();
+console.log(myvar);
+
+let ject = {name:'virat',git:'github/htdoc'};
+
+function rep(oop){
+    repar = []; 
+    for(i=0;i<10;i++){
+        let noop = {...oop};
+        noop.id = i;
+        repar.push(noop);
+    }
+        console.log(JSON.stringify(repar));
+}
+rep(ject)
+
+function tricky(){
+for(var i=0;i<5;i++){
+   setTimeout((function(i){
+    console.log(i)
+   })(i),0)
+}
+}
+
+tricky()
 
 </script>
 </html>
