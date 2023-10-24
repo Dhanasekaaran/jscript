@@ -1,4 +1,8 @@
 <html>
+<div>
+    <p>Learning interval & timeout</p>
+    <h1 id="pop"></h1>
+</div>
 <script>
     let ar = [1, 4, [3, 7], 2, [5, [8, 9], 10], 12];
     //let flatdata = ar.flat(3);
@@ -38,256 +42,382 @@
 
     //some,every
     console.log('----');
-    const numval = [4,2,5,3,8,9,-3,5,-2,1];
+    const numval = [4, 2, 5, 3, 8, 9, -3, 5, -2, 1];
 
-   let hasNeg = false;
+    let hasNeg = false;
 
-   for(i=0;i<numval.length;i++){
-    //console.log(numval[i]);
-    if(numval[i] < 0){
-        hasNeg = true;
+    for (i = 0; i < numval.length; i++) {
+        //console.log(numval[i]);
+        if (numval[i] < 0) {
+            hasNeg = true;
+        }
     }
-   }
-//console.log(hasNeg);
+    //console.log(hasNeg);
 
-let hasneg = numval.every(items => {
-    return items < 0
-})
+    let hasneg = numval.every(items => {
+        return items < 0
+    })
 
-//console.log(hasneg);
+    //console.log(hasneg);
 
-console.log('----');
-const red = [3,5,6,7,54,6,35,5,67,6];
+    console.log('----');
+    const red = [3, 5, 6, 7, 54, 6, 35, 5, 67, 6];
 
-const add = red.reduce((acc,cur) => {
-    return acc + cur 
-}) 
-console.log('Reduce ',add);
+    const add = red.reduce((acc, cur) => {
+        return acc + cur
+    })
+    console.log('Reduce ', add);
 
-//Arrow fn
-console.log('----');
-function xy(){
-    console.log('normal fn',this);
-}
-
-let addd = (a,b) => {
-    return a + b
-}
-
-console.log(addd(1,2));
-new xy();
-
-let youtube = {
-    channel:'program',
-    greet1 : function () {
-        console.log(this.constructor.name)
-    },
-    greet2 : () => {
-        console.log(this.constructor.name)
+    //Arrow fn
+    console.log('----');
+    function xy() {
+        console.log('normal fn', this);
     }
-}
-youtube.greet1();
-youtube.greet2();
 
-//async,await
-let promise = new Promise((res,rej) => {
-    setTimeout(() => {
-        res(0)
-    },2000)
-})
-
-async function some(){
-  //  console.log('a');
-    let pdata = await promise;
-   // console.log(pdata);
-    //console.log('c');
-}
-some()
-
-//callback
-console.log('------')
-function callback(num,cb) {
-for(i=0;i<num;i++){
-   // console.log(i);
-}
-cb(i)
-}
-
-callback(10,(last) => console.log('last num',last));
-
-//callbackpromise
-console.log('-----')
-let p = new Promise((res,rej) => {
-    setTimeout(() => {
-        res(2)
-    },1000)
-})
-
-p.then((data) => {
-    //console.log('Then1 ',data);
-    return data + 2
-}).then((data) => {
-    throw new Error();
-    //console.log('Then2 ',data)
-    return data + 4
-}).catch((err) => {
-   // console.log('Err occ ',err)
-})
-
-console.log('-------')
-function dou(val){
-  return val*2;
-}
-function val(num1,res=dou(num1)){
-  //  console.log(res)
-}
-val(2);
-
-console.log('------');
-//destructure
-
-let ar1 = [2,3,4,5];
-
-let [one,two,three,four] = ar1;
-
-// console.log(one);
-// console.log(two);
-// console.log(three);
-// console.log(four);
-
-let a = 10;
-let b = 20;
-
-[b,a] = [a,b];
-
-// console.log(a);
-// console.log(b);
-
-let obj = {
-    a1:120,
-    b1:130,
-    c1:{
-        d1:{e1:140}
+    let addd = (a, b) => {
+        return a + b
     }
-}
 
-let {c1:{d1:{e1}}} = obj; 
-//console.log(e1);
-function pro(){
-    return Promise.reject('Erroir')
-}
+    console.log(addd(1, 2));
+    new xy();
 
-(async function(){
-let wait = await pro().then((data) => console.log(data)).catch((err) => console.log() );
-//console.log(wait);
-}());
-
-//findunique
-const str = "acdelkda";
-
-const hash = {};
-
-for(i=0;i<str.length;i++){
-    hash[str[i]] = (hash[str[i]] || 0) + 1;
-}
-for(let keyy in hash){
-    console.log("Answer ",keyy +':'+ hash[keyy]);
-}
-//console.log(hash);
-console.log('--------');
-function all(...no){
-  return no.reduce((a,c)=> a+c,0)
-}
-console.log(all(5,6,8,3));
-
-function addx(a,b){
-    return a + b
-}
-console.log(addx(7,9));
-
-//arrow
-//arrow can assign to variable,this,argumrnts not have,new keyword not used
-function xcv() {
-    this.a = 11;
-   // let that = this;
-    setTimeout(() => {
-        console.log('Value inside ',this.a)
-    },100)
-    console.log('Value outsdieis ',this.a)
-}
-let v = new xcv()
-
-function nor(){
-    console.log(arguments);
-}
-
-const fat = (...arg) => {
-    console.log(arg);
-}
-
-nor(22,23,23);
-fat(30,32,33);
-
-//map&filter
-var arn = ['My name','My roll'];
-
-var rmp = arn.map((item) => {
-    return item +' is'
-});
-
-console.log(rmp);
-
-var mk = [50,65,30,22,11,76];
-
-var rc = mk.filter((item) => {
-    return item < 30
-})
-
-console.log(rc.length);
-
-//callapplybind
-function vim(aa) {
-    console.log(this,aa);
-}
-let oj = {
-    v1:20
-}
-//vimf = vim.bind(oj);
-vim.apply(oj,[23])
-
-//lexical scope,fn scope
-
-
-
-function gg(){
- myvar = 33;
-console.log(myvar);
-}
-gg();
-console.log(myvar);
-
-let ject = {name:'virat',git:'github/htdoc'};
-
-function rep(oop){
-    repar = []; 
-    for(i=0;i<10;i++){
-        let noop = {...oop};
-        noop.id = i;
-        repar.push(noop);
+    let youtube = {
+        channel: 'program',
+        greet1: function () {
+            console.log(this.constructor.name)
+        },
+        greet2: () => {
+            console.log(this.constructor.name)
+        }
     }
+    youtube.greet1();
+    youtube.greet2();
+
+    //async,await
+    let promise = new Promise((res, rej) => {
+        setTimeout(() => {
+            res(0)
+        }, 2000)
+    })
+
+    async function some() {
+        //  console.log('a');
+        let pdata = await promise;
+        // console.log(pdata);
+        //console.log('c');
+    }
+    some()
+
+    //callback
+    console.log('------')
+    function callback(num, cb) {
+        for (i = 0; i < num; i++) {
+            // console.log(i);
+        }
+        cb(i)
+    }
+
+    callback(10, (last) => console.log('last num', last));
+
+    //callbackpromise
+    console.log('-----')
+    let p = new Promise((res, rej) => {
+        setTimeout(() => {
+            res(2)
+        }, 1000)
+    })
+
+    p.then((data) => {
+        //console.log('Then1 ',data);
+        return data + 2
+    }).then((data) => {
+        throw new Error();
+        //console.log('Then2 ',data)
+        return data + 4
+    }).catch((err) => {
+        // console.log('Err occ ',err)
+    })
+
+    console.log('-------')
+    function dou(val) {
+        return val * 2;
+    }
+    function val(num1, res = dou(num1)) {
+        //  console.log(res)
+    }
+    val(2);
+
+    console.log('------');
+    //destructure
+
+    let ar1 = [2, 3, 4, 5];
+
+    let [one, two, three, four] = ar1;
+
+    // console.log(one);
+    // console.log(two);
+    // console.log(three);
+    // console.log(four);
+
+    let a = 10;
+    let b = 20;
+
+    [b, a] = [a, b];
+
+    // console.log(a);
+    // console.log(b);
+
+    let obj = {
+        a1: 120,
+        b1: 130,
+        c1: {
+            d1: { e1: 140 }
+        }
+    }
+
+    let { c1: { d1: { e1 } } } = obj;
+    //console.log(e1);
+    function pro() {
+        return Promise.reject('Erroir')
+    }
+
+    (async function () {
+        let wait = await pro().then((data) => console.log(data)).catch((err) => console.log());
+        //console.log(wait);
+    }());
+
+    //findunique
+    const str = "acdelkda";
+
+    const hash = {};
+
+    for (i = 0; i < str.length; i++) {
+        hash[str[i]] = (hash[str[i]] || 0) + 1;
+    }
+    for (let keyy in hash) {
+        console.log("Answer ", keyy + ':' + hash[keyy]);
+    }
+    //console.log(hash);
+    console.log('--------');
+    function all(...no) {
+        return no.reduce((a, c) => a + c, 0)
+    }
+    console.log(all(5, 6, 8, 3));
+
+    function addx(a, b) {
+        return a + b
+    }
+    console.log(addx(7, 9));
+
+    //arrow
+    //arrow can assign to variable,this,argumrnts not have,new keyword not used
+    function xcv() {
+        this.a = 11;
+        // let that = this;
+        setTimeout(() => {
+            console.log('Value inside ', this.a)
+        }, 100)
+        console.log('Value outsdieis ', this.a)
+    }
+    let v = new xcv()
+
+    function nor() {
+        console.log(arguments);
+    }
+
+    const fat = (...arg) => {
+        console.log(arg);
+    }
+
+    nor(22, 23, 23);
+    fat(30, 32, 33);
+
+    //map&filter
+    var arn = ['My name', 'My roll'];
+
+    var rmp = arn.map((item) => {
+        return item + ' is'
+    });
+
+    console.log(rmp);
+
+    var mk = [50, 65, 30, 22, 11, 76];
+
+    var rc = mk.filter((item) => {
+        return item < 30
+    })
+
+    console.log(rc.length);
+
+    //callapplybind
+    function vim(aa) {
+        console.log(this, aa);
+    }
+    let oj = {
+        v1: 20
+    }
+    //vimf = vim.bind(oj);
+    vim.apply(oj, [23])
+
+    //lexical scope,fn scope
+
+
+
+    function gg() {
+        myvar = 33;
+        console.log(myvar);
+    }
+    gg();
+    console.log(myvar);
+
+    let ject = { name: 'virat', git: 'github/htdoc' };
+
+    function rep(oop) {
+        repar = [];
+        for (i = 0; i < 10; i++) {
+            let noop = { ...oop };
+            noop.id = i;
+            repar.push(noop);
+        }
         console.log(JSON.stringify(repar));
-}
-rep(ject)
+    }
+    rep(ject)
 
-function tricky(){
-for(var i=0;i<5;i++){
-   setTimeout((function(i){
-    console.log(i)
-   })(i),0)
-}
-}
+    function tricky() {
+        for (var i = 0; i < 5; i++) {
+            setTimeout((function (i) {
+                console.log(i)
+            })(i), 0)
+        }
+    }
+    tricky()
 
-tricky()
+    //objclo
+    let j = { x: 1, y: 2, z: function () { }, d: { c: 45 } };
+    //let j1 = JSON.parse(JSON.stringify(j));
+    let j1 = Object.assign({}, j, { w: 44 });
+    j1.x = 10;
+    console.log(j);
+    console.log(j1);
+
+    let str1 = "*******hello******world*****";
+    let patter = /hello\**world/g;
+    let rt = str1.replace(patter, 'hello world');
+
+    console.log(rt);
+
+    const misep = new Promise((res, rej) => {
+        setTimeout(() => res(1), 1000)
+    })
+
+    const misep1 = new Promise((res, rej) => {
+        setTimeout(() => rej(2), 2000)
+    })
+
+    const misep2 = new Promise((res, rej) => {
+        setTimeout(() => res(3), 3000)
+    })
+
+    Promise.all([misep, misep1, misep2])
+        .then(console.log)
+        .catch((errr) => console.log('Prob ', errr))
+
+    ///array duplicate
+    let tol = [2, 3, 55, 2, 3, 2, 7, 7];
+    let aya = [];
+    function dupl(val) {
+        for (i = 0; i < tol.length; i++) {
+            if (aya.indexOf(tol[i]) === -1) {
+                aya.push(tol[i])
+            }
+        }
+        return aya;
+    }
+    console.log(dupl(tol));
+
+    //method2
+    let ayy = {};
+
+    function dupp(vl) {
+        for (i = 0; i < vl.length; i++) {
+            ayy[vl[i]] = 1
+        }
+        return Object.keys(ayy).map(vk => +vk);
+    }
+
+    console.log(dupp(tol));
+
+    //method3
+
+    console.log([...new Set(tol)]);
+
+    //setInterval&Timeout
+    let d = document.getElementById('pop');
+    let ic = 0;
+    let inter = setInterval(() => {
+        d.innerText = ic;
+        ic++;
+    }, 1000)
+
+    setTimeout(() => {
+        clearInterval(inter);
+        d.innerText = 'UI GEMS';
+    }, 3000)
+
+    const t1 = [4, 5, 5, 5, 5];
+
+    const t3 = [7, 4, 3, 2, 2, 5];
+
+    const t2 = [...t1];
+
+    function uum(...goog) {
+        console.log(goog);
+    }
+    uum(3, 4, 4, 5)
+
+    console.log(t2);
+
+    let namer = "dood";
+
+    let dname = namer.split('').reverse().join('');
+
+    console.log(dname);
+
+    function rep(namer) {
+        let left = 0;
+        let right = namer.length - 1;
+        while (left < right) {
+            if (namer[left] != namer[right]) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+    console.log(rep(namer))
+
+    let rg = `hello from  ${(1+4) ? 'true' : 'false'}
+    madurai`;
+
+    function vv(rr){
+        console.log(rr)
+    }
+    vv `22232`
+
+    console.log(rg)
+
 
 </script>
+<div style="border:2px solid;padding:13px;margin:10px">
+    Head1
+</div>
+<div style="border:2px solid;padding:13px;margin:10px">
+    Head2
+</div>
+<div style="border:2px solid;padding:13px;margin:10px">
+    Head3
+</div>
+
+
 </html>
